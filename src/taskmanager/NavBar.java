@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -64,7 +65,7 @@ public class NavBar extends JPanel{
         
 
         separator1.setPreferredSize(new Dimension(176, 1));
-        separator1.setBackground(new Color(0xB2B1B7));
+        separator1.setBackground(new Color(0xB2B1B7)); 
         separator1.setOpaque(true);  
  
  
@@ -135,8 +136,7 @@ public class NavBar extends JPanel{
 
        
        Border border = BorderFactory.createEtchedBorder();
-//       Border margin = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-//       
+//       Border margin = BorderFactory.createEmptyBorder(10, 10, 10, 10);      
 //       setBorder(BorderFactory.createCompoundBorder(margin, border));
       setBorder(border);
        
@@ -230,16 +230,11 @@ public class NavBar extends JPanel{
        gbc.gridx = 0;
        gbc.gridy=8;
        gbc.fill = GridBagConstraints.NONE;
-       gbc.ipadx =94;
-       gbc.ipady = 1;
+      //  gbc.ipadx =94;
+      //  gbc.ipady = 1;
+      gbc.insets = new Insets(0, 23, 0, 0); 
        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
        add(reports, gbc);
-
-
-
-
-
-
 
        
     }
