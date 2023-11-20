@@ -5,6 +5,7 @@
 package taskmanager;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -25,9 +26,8 @@ import javax.swing.border.EmptyBorder;
 public class NavBar extends JPanel{
      
     private JLabel titleRole;
-    private JLabel separator1,positioned,separator2;
-    
-    
+    private JLabel separator1,positioned,separator2;  
+     private JLabel dashboard,project,user,reports;
     
     NavBar(){
        Dimension dim = getPreferredSize();
@@ -39,10 +39,18 @@ public class NavBar extends JPanel{
         separator1 = new JLabel("");
         separator2 = new JLabel("");
         positioned = new JLabel("Administrator");
+        dashboard =  new JLabel("Dashboard");
+        project  =new JLabel("Project");
+        user  =new JLabel("Users");
+        reports =new JLabel("Reports");
 
+        
+        Font labelFont = titleRole.getFont();
+        titleRole.setFont(new Font(labelFont.getName(), Font.BOLD, 24));  
+        titleRole.setForeground(new Color(0xB2B1B7));
+        
 
         ImageIcon icon = new ImageIcon("src/images/nft.jpg");
-
         int iconWidth = 30;
         int iconHeight = 30;
         // Create a new ImageIcon with the specified size
@@ -50,28 +58,81 @@ public class NavBar extends JPanel{
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         // Set the icon for the JLabel
         positioned.setIcon(scaledIcon);
-
-
-
-        
-        Font labelFont = titleRole.getFont();
-        titleRole.setFont(new Font(labelFont.getName(), Font.BOLD, 24));  
-        titleRole.setForeground(new Color(0xB2B1B7));
-        
         Font positionFont = positioned.getFont();
-        positioned.setFont(new Font(labelFont.getName(), Font.PLAIN, 18));  
+        positioned.setFont(new Font(positionFont.getName(), Font.PLAIN, 18));  
         positioned.setForeground(new Color(0xB2B1B7));
         
+
         separator1.setPreferredSize(new Dimension(176, 1));
         separator1.setBackground(new Color(0xB2B1B7));
         separator1.setOpaque(true);  
  
  
-       separator2.setPreferredSize(new Dimension(176, 1));
-       separator2.setBackground(new Color(0xB2B1B7));
-       separator2.setOpaque(true); // Ensure the label is opaque to show the background color
-     
+        separator2.setPreferredSize(new Dimension(176, 1));
+        separator2.setBackground(new Color(0xB2B1B7));
+        separator2.setOpaque(true); // Ensure the label is opaque to show the background color
+       
+
+        ImageIcon dashboardIcon = new ImageIcon("src/images/dashyboard.png");
+        int dashWidth = 20;
+        int dashHeight = 20;
+        // Create a new ImageIcon with the specified size
+        Image dashScaledImage = dashboardIcon.getImage().getScaledInstance(dashWidth, dashHeight, Image.SCALE_SMOOTH);
+        ImageIcon setDashIcon = new ImageIcon(dashScaledImage);
+        // Set the icon for the JLabel
+        dashboard.setIcon(setDashIcon);       
+        Font dashboardFont = dashboard.getFont();
+        dashboard.setFont(new Font(dashboardFont.getName(),Font.PLAIN,16));
+        dashboard.setForeground(new Color(0xB2B1B7));
+        dashboard.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+        ImageIcon projectIcon = new ImageIcon("src/images/project.png");
+        int projectWidth = 20;
+        int projectHeight = 20;
+        // Create a new ImageIcon with the specified size
+        Image projectScaledImage = projectIcon.getImage().getScaledInstance(projectWidth, projectHeight, Image.SCALE_SMOOTH);
+        ImageIcon setProjectIcon = new ImageIcon(projectScaledImage);
+        // Set the icon for the JLabel
+        project.setIcon(setProjectIcon);       
+        Font projectFont = project.getFont();
+        project.setFont(new Font(projectFont.getName(),Font.PLAIN,16));
+        project.setForeground(new Color(0xB2B1B7));
+        project.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+
+
+
+        ImageIcon userIcon = new ImageIcon("src/images/users.png");
+        int userWidth = 20;
+        int userHeight = 20;
+        // Create a new ImageIcon with the specified size
+        Image userScaledImage = userIcon.getImage().getScaledInstance(userWidth, userHeight, Image.SCALE_SMOOTH);
+        ImageIcon setUserIcon = new ImageIcon(userScaledImage);
+        // Set the icon for the JLabel
+        user.setIcon(setUserIcon);       
+        Font userFont =user.getFont();
+        user.setFont(new Font(userFont.getName(),Font.PLAIN,16));
+        user.setForeground(new Color(0xB2B1B7));
+        user.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+
+        ImageIcon reportIcon = new ImageIcon("src/images/reports.png");
+        int reportWidth = 20;
+        int reportHeight = 20;
+        // Create a new ImageIcon with the specified size
+        Image reportScaledImage = reportIcon.getImage().getScaledInstance(reportWidth, reportHeight, Image.SCALE_SMOOTH);
+        ImageIcon setReportIcon = new ImageIcon(reportScaledImage);
+        // Set the icon for the JLabel
+        reports.setIcon(setReportIcon);       
+        Font reportFont =user.getFont();
+        reports.setFont(new Font(reportFont.getName(),Font.PLAIN,16));
+        reports.setForeground(new Color(0xB2B1B7));
+        reports.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
           
+
+
+
        
        Border border = BorderFactory.createEtchedBorder();
 //       Border margin = BorderFactory.createEmptyBorder(10, 10, 10, 10);
@@ -121,7 +182,7 @@ public class NavBar extends JPanel{
  
  
        gbc.weightx = 1;
-       gbc.weighty = 3;
+       gbc.weighty = 0.3;
        gbc.gridx = 0;
        gbc.gridy=4;
        gbc.fill = GridBagConstraints.NONE;
@@ -129,6 +190,56 @@ public class NavBar extends JPanel{
        gbc.ipady = 1;
        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
        add(separator2, gbc);
+       
+    // dashboard
+      gbc.weightx = 1;
+       gbc.weighty = 0.1;
+       gbc.gridx = 0;
+       gbc.gridy=5;
+       gbc.fill = GridBagConstraints.NONE;
+       gbc.ipadx =70;
+       gbc.ipady = 1;
+       gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+       add(dashboard, gbc);
+
+     // Project
+      gbc.weightx = 1;
+       gbc.weighty = 0.1;
+       gbc.gridx = 0;
+       gbc.gridy=6;
+       gbc.fill = GridBagConstraints.NONE;
+       gbc.ipadx =97;
+       gbc.ipady = 1;
+       gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+       add(project, gbc);
+
+     // user
+        gbc.weightx = 1;
+       gbc.weighty = 0.1;
+       gbc.gridx = 0;
+       gbc.gridy=7;
+       gbc.fill = GridBagConstraints.NONE;
+       gbc.ipadx =107;
+       gbc.ipady = 1;
+       gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+       add(user, gbc);
+
+        // reports
+       gbc.weightx = 1;
+       gbc.weighty = 3;
+       gbc.gridx = 0;
+       gbc.gridy=8;
+       gbc.fill = GridBagConstraints.NONE;
+       gbc.ipadx =94;
+       gbc.ipady = 1;
+       gbc.anchor = GridBagConstraints.FIRST_LINE_END;
+       add(reports, gbc);
+
+
+
+
+
+
 
        
     }
