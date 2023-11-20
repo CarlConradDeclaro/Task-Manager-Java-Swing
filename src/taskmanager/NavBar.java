@@ -9,7 +9,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
+
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
@@ -35,7 +38,21 @@ public class NavBar extends JPanel{
         titleRole = new JLabel("Admin Role");
         separator1 = new JLabel("");
         separator2 = new JLabel("");
-        positioned = new JLabel("Positioned");
+        positioned = new JLabel("Administrator");
+
+
+        ImageIcon icon = new ImageIcon("src/images/nft.jpg");
+
+        int iconWidth = 30;
+        int iconHeight = 30;
+        // Create a new ImageIcon with the specified size
+        Image scaledImage = icon.getImage().getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        // Set the icon for the JLabel
+        positioned.setIcon(scaledIcon);
+
+
+
         
         Font labelFont = titleRole.getFont();
         titleRole.setFont(new Font(labelFont.getName(), Font.BOLD, 24));  
@@ -97,7 +114,7 @@ public class NavBar extends JPanel{
        gbc.gridy=3;
        gbc.fill = GridBagConstraints.NONE;
        gbc.anchor = GridBagConstraints.FIRST_LINE_END;
-       gbc.ipadx =60;
+       gbc.ipadx =45;
        gbc.ipady = 1;
        add(positioned, gbc);
  
