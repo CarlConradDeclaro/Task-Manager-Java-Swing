@@ -129,8 +129,7 @@ public class NavBar extends JPanel{
         reports.setFont(new Font(reportFont.getName(),Font.PLAIN,16));
         reports.setForeground(new Color(0xB2B1B7));
         reports.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-          
+       
 
 
 

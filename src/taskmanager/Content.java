@@ -41,7 +41,7 @@ public class Content  extends JPanel{
        //Border border = BorderFactory.createEtchedBorder();
        Border margin = BorderFactory.createEmptyBorder(10, 10, 20, 10);
        
-       setBorder(margin);
+    setBorder(margin);
      setContentLayout();
     }
 

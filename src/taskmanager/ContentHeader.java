@@ -23,7 +23,7 @@ public class ContentHeader  extends JPanel{
         title.setFont(new Font(titlteFont.getName(),Font.BOLD,22));
         setBackground(Color.decode("#FFFFFF"));
         setOpaque(true); 
-        title.setForeground( Color.decode("#54575F"));
+        title.setForeground( Color.decode("#1D252F"));
 
 
         setLayout(new GridBagLayout());
