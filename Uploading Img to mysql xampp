@@ -1,0 +1,138 @@
+ package databasetesting;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class DatabaseTesting {
+
+    public static void main(String[] args) {
+        new ImageUploadPanel().setVisible(true);
+    }
+}
+
+class ImageUploadPanel extends JFrame {
+
+    private JTextField nameField;
+    private JTextField descriptionField;
+    private JButton uploadButton;
+    private JLabel imageLabel;
+    private JFileChooser fileChooser;
+
+    public ImageUploadPanel() {
+        super("Image Upload Panel");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(5, 2, 10, 10));
+
+        nameField = new JTextField();
+        descriptionField = new JTextField();
+        uploadButton = new JButton("Upload");
+        imageLabel = new JLabel();
+        fileChooser = new JFileChooser();
+
+        add(new JLabel("Name:"));
+        add(nameField);
+        add(new JLabel("Description:"));
+        add(descriptionField);
+        add(new JLabel("Select Image:"));
+        add(createFileSelectionPanel());
+        add(uploadButton);
+
+        uploadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                uploadDataToDatabase();
+            }
+        });
+
+        pack();
+        setLocationRelativeTo(null);
+        setSize(500,400);
+    }
+
+    private JPanel createFileSelectionPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+
+        JButton selectButton = new JButton("Select File");
+        selectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int result = fileChooser.showOpenDialog(ImageUploadPanel.this);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    
+                    File selectedFile = fileChooser.getSelectedFile();
+                 
+                      int desiredWidth = 300; // Specify your desired width
+                      int desiredHeight = 300;
+                      ImageIcon imageIcon = new ImageIcon(new ImageIcon(selectedFile.getPath()).getImage().getScaledInstance(desiredWidth, desiredHeight, Image.SCALE_DEFAULT));
+
+                    imageLabel.setIcon(imageIcon);
+                }
+            }
+        });
+
+        panel.add(selectButton, BorderLayout.WEST);
+        panel.add(imageLabel, BorderLayout.CENTER);
+
+        return panel;
+    }
+
+    private void uploadDataToDatabase() {
+        String url = "jdbc:mysql://localhost:3306/client";
+        String username = "root";
+        String password = "";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(url, username, password);
+
+            // Get the values from the text fields
+            String nameToInsert = nameField.getText();
+            String descriptionToInsert = descriptionField.getText();
+
+            // Get the image file
+            File selectedFile = fileChooser.getSelectedFile();
+            FileInputStream fis = new FileInputStream(selectedFile);
+
+            // Insert data into the database
+            String query = "INSERT INTO userdata (id, FirstName, image) VALUES (?, ?, ?)";
+            PreparedStatement preparedStatement = con.prepareStatement(query);
+            preparedStatement.setString(1, nameToInsert);
+            preparedStatement.setString(2, descriptionToInsert);
+            preparedStatement.setBinaryStream(3, fis, (int) selectedFile.length());
+
+            preparedStatement.executeUpdate();
+
+            System.out.println("Data inserted successfully!");
+
+            // Close the connection when done
+            con.close();
+             nameField.setText("");
+        descriptionField.setText("");
+
+        // Reset image label
+        imageLabel.setIcon(null);
+
+        } catch (ClassNotFoundException | SQLException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
