@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
 public class Dashboard extends JPanel{
+
     
     JLabel greetings,separator;
     ProjectPanel projectPanel,usersPanel,projectReport;
