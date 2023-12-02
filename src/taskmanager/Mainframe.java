@@ -11,7 +11,6 @@ import javax.swing.JFrame;
  * @author carlconrad
  */
 
-
 public class Mainframe  extends JFrame{
     
       private NavBar navbar;
