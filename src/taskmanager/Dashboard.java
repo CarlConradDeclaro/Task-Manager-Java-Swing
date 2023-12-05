@@ -18,6 +18,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+
 public class Dashboard extends JPanel{
     
     JLabel greetings,separator;
